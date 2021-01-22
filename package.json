@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
+    "migratedb": "knex migrate:latest",
+    "seeddb": "knex seed:run",
     "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent"
   },
   "repository": {
