@@ -4,11 +4,11 @@ exports.seed = function(knex) {
       return knex('resources').insert([
         { 
           resource_name: "Canvas", 
-          resource_description: "Learning platform"
+          resource_description: "Learning platform."
         },
         { 
-          resource_name: "-test-resource1-test-", 
-          resource_description: "-test-bazbiz-test-"
+          resource_name: "Google", 
+          resource_description: "It's not about having all the answers, it's about knowing where to find them."
         }
       ]);
     });
