@@ -1,4 +1,5 @@
 const db = require("../../data/db-config")
+const helpers = require("../middleware/helpers")
 
 module.exports = {
   findAll,
@@ -6,12 +7,18 @@ module.exports = {
 }
 
 function findAll() {
-  return db("projects")
+  let query = db("projects")
+
+  return query.then(projects => {
+    return projects.map(project => helpers.projectToBody(project))
+  })
 }
 
 function insert(body) {
-  return db("projects").insert(body)
+  let query = db("projects").insert(body)
     .then(([id]) => {
       return db("projects").where({ project_id: id }).first()
     })
+
+  return query.then(project => helpers.projectToBody(project))
 }
