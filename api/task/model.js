@@ -8,7 +8,7 @@ module.exports = {
 
 function findAll() {
   let query = db("tasks as t")
-    .join("projects as p")
+    .join("projects as p", "t.project_id", "p.project_id")
     .select(
       "t.task_id",
       "t.task_description",
