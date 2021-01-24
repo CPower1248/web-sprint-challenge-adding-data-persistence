@@ -6,7 +6,7 @@ module.exports = {
   insert
 }
 
-function findAll() {
+function findAll(id) {
   let query = db("tasks as t")
     .join("projects as p", "t.project_id", "p.project_id")
     .select(
@@ -17,10 +17,18 @@ function findAll() {
       "p.project_name", 
       "p.project_description"
     )
-    
-  return query.then(tasks => {
-    return tasks.map(task => helpers.taskToBody(task))
-  })
+  
+  if (id) {
+    const task = query.where("task_id", id).first()
+
+    return task.then(task => {
+      return helpers.taskToBody(task)
+    })
+  } else {
+    return query.then(tasks => {
+      return tasks.map(task => helpers.taskToBody(task))
+    })
+  }
 }
 
 function insert(body) {

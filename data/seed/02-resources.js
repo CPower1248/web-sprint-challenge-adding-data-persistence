@@ -15,6 +15,10 @@ exports.seed = function(knex) {
           resource_description: "Lets you know if the app is funtioning as intended."
         },
         {
+          resource_name: "MDN",
+          resource_description: "Library"
+        },
+        {
           resource_name: "W3Schools",
           resource_description: "Library"
         },

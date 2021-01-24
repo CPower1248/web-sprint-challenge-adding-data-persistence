@@ -6,11 +6,13 @@ const projectsRouter = require("./project/router")
 const resourcesRouter = require("./resource/router")
 const tasksRouter = require("./task/router")
 const project_resourcesRouter = require("./project_resources/router")
+const project_tasksRouter = require("./project_tasks/router")
 
 server.use("/api/projects", projectsRouter)
 server.use("/api/resources", resourcesRouter)
 server.use("/api/tasks", tasksRouter)
 server.use("/api/project_resources", project_resourcesRouter)
+server.use("/api/project_tasks", project_tasksRouter)
 
 server.use((error, req, res, next) => {
   res.status(500).json({ 

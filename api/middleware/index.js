@@ -1,11 +1,13 @@
 const Projects = require("../project/model")
 const Resources = require("../resource/model")
+const Tasks = require("../task/model")
 
 module.exports = {
   valProject,
   valResource,
   valTask,
-  valProjectResource
+  valProjectResource,
+  valProjectTask
 }
 
 function valProject(req, res, next) {
@@ -62,6 +64,28 @@ async function valProjectResource(req, res, next) {
       res.status(400).json({ message: `The project with id ${project_id} could not be found` })
     } else {
       res.status(400).json({ message: `The resource with id ${resource_id} could not be found` })
+    }
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function valProjectTask(req, res, next) {
+  try {
+    const { project_id, task_id } = req.body
+  
+    let queryProject = await Projects.findAll(project_id)
+    let queryTask = await Tasks.findAll(task_id)
+  
+    const valProjectId = queryProject.project_id
+    const valTaskId = queryTask.resource_id
+   
+    if (valProjectId && valTaskId) {
+      next()
+    } else if (!valProjectId) {
+      res.status(400).json({ message: `The project with id ${project_id} could not be found` })
+    } else {
+      res.status(400).json({ message: `The task with id ${task_id} could not be found` })
     }
   } catch (err) {
     next(err)
