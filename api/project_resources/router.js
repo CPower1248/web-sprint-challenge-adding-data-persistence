@@ -20,4 +20,23 @@ router.get("/", (req, res, next) => {
   }
 })
 
+router.post("/", (req, res, next) => {
+  const { body } = req
+
+  try {
+    Project_Resources.insert(body)
+      .then(newProjectResource => {
+        res.status(200).json(newProjectResource)
+      })
+      .catch(err => {
+        res.status(400).json({ 
+          message: "Could not create new project resource",
+          error: err.message
+        })
+      })
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router

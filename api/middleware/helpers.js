@@ -2,7 +2,8 @@ module.exports = {
   intToBool,
   boolToInt,
   projectToBody,
-  taskToBody
+  taskToBody,
+  project_resourceToBody
 }
 
 function intToBool(int) {
@@ -26,6 +27,15 @@ function taskToBody(task) {
   const result = {
     ...task,
     task_completed: intToBool(task.task_completed),
+  };
+
+  return result;
+}
+
+function project_resourceToBody(project_resource) {
+  const result = {
+    ...project_resource,
+    project_completed: intToBool(project_resource.project_completed),
   };
 
   return result;

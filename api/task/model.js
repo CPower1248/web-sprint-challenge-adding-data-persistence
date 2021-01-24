@@ -17,6 +17,7 @@ function findAll() {
       "p.project_name", 
       "p.project_description"
     )
+    
   return query.then(tasks => {
     return tasks.map(task => helpers.taskToBody(task))
   })
