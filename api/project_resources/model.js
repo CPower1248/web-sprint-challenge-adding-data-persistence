@@ -10,7 +10,7 @@ function findAll() {
   let query = db("project_resources as pr")
     .leftJoin("projects as p", "pr.project_id", "p.project_id")
     .leftJoin("resources as r", "pr.resource_id", "r.resource_id")
-    .orderBy("p.project_id")
+    .orderBy("p.project_id").orderBy("r.resource_id")
   
   return query.then(project_resources => {
     return project_resources.map(project_resource => helpers.projectToBody(project_resource))

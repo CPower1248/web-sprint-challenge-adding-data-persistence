@@ -6,12 +6,20 @@ module.exports = {
   insert
 }
 
-function findAll() {
+function findAll(id) {
   let query = db("projects")
 
-  return query.then(projects => {
-    return projects.map(project => helpers.projectToBody(project))
-  })
+  if (id) {
+    const project = query.where("project_id", id).first()
+
+    return project.then(project => {
+        return helpers.projectToBody(project)
+      })
+  } else {
+    return query.then(projects => {
+      return projects.map(project => helpers.projectToBody(project))
+    })
+  }
 }
 
 function insert(body) {

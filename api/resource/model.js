@@ -5,8 +5,14 @@ module.exports = {
   insert
 }
 
-function findAll() {
-  return db("resources")
+function findAll(id) {
+  let query = db("resources as r")
+
+  if (id) {
+    return query.where("resource_id", id).first()
+  } else {
+    return query
+  }
 }
 
 function insert(body) {

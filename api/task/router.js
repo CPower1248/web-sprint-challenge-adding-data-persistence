@@ -3,6 +3,8 @@ const router = express.Router()
 
 const Tasks = require("./model")
 
+const { valTask } = require("../middleware")
+
 router.get("/", (req, res, next) => {
   try {
     Tasks.findAll()
@@ -20,7 +22,7 @@ router.get("/", (req, res, next) => {
   }
 })
 
-router.post("/", (req, res, next) => {
+router.post("/", valTask, (req, res, next) => {
   const { body } = req
 
   try {

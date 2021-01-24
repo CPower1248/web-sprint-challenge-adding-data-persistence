@@ -26,6 +26,8 @@ function findAll() {
 function insert(body) {
   return db("tasks").insert(body)
     .then(([id]) => {
-      return db("tasks").where({ task_id: id }).first()
+      const query = db("tasks").where({ task_id: id }).first()
+
+      return query.then(task => helpers.taskToBody(task))
     })
 }

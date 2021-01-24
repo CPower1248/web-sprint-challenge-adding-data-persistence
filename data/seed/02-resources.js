@@ -9,6 +9,22 @@ exports.seed = function(knex) {
         { 
           resource_name: "Google", 
           resource_description: "It's not about having all the answers, it's about knowing where to find them."
+        },
+        {
+          resource_name: "CodeGrade",
+          resource_description: "Lets you know if the app is funtioning as intended."
+        },
+        {
+          resource_name: "W3Schools",
+          resource_description: "Library"
+        },
+        {
+          resource_name: "Stack Overflow",
+          resource_description: "Library"
+        },
+        {
+          resource_name: "Archive Projects",
+          resource_description: "Personal library :D"
         }
       ]);
     });

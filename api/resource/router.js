@@ -3,6 +3,8 @@ const router = express.Router()
 
 const Resources = require("./model")
 
+const { valResource } = require("../middleware")
+
 router.get("/", (req, res, next) => {
   try {
     Resources.findAll()
@@ -20,7 +22,7 @@ router.get("/", (req, res, next) => {
   }
 })
 
-router.post("/", (req, res, next) => {
+router.post("/", valResource, (req, res, next) => {
   const { body } = req
 
   try {

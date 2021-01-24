@@ -3,7 +3,8 @@ module.exports = {
   boolToInt,
   projectToBody,
   taskToBody,
-  project_resourceToBody
+  project_resourceToBody,
+  bodyToProject
 }
 
 function intToBool(int) {
@@ -39,4 +40,13 @@ function project_resourceToBody(project_resource) {
   };
 
   return result;
+}
+
+function bodyToProject(project) {
+  const result = {
+    ...project,
+    project_completed: boolToInt(project.project_completed)
+  }
+  
+  return result
 }
