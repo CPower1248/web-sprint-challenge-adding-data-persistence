@@ -3,6 +3,8 @@ const router = express.Router()
 
 const Project_Resources = require("./model")
 
+const { valResourceId } = require("../middleware")
+
 router.get("/", (req, res, next) => {
   try {
     Project_Resources.findAll()
@@ -34,6 +36,23 @@ router.post("/", (req, res, next) => {
           error: err.message
         })
       })
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get("/:id/resource_projects", valResourceId, (req, res, next) => {
+  const { id } = req.params
+
+  try{
+    Project_Resources.findResourceProjects(id)
+      .then(resource_projects => {
+        res.status(200).json(resource_projects)
+      })
+      .catch(err => res.status(400).json({ 
+        message: `The resource with id ${id} could not be found`, 
+        error: err.message 
+      }))
   } catch (err) {
     next(err)
   }

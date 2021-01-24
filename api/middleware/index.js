@@ -7,7 +7,8 @@ module.exports = {
   valResource,
   valTask,
   valProjectResource,
-  valProjectTask
+  valProjectTask,
+  valResourceId
 }
 
 function valProject(req, res, next) {
@@ -78,7 +79,7 @@ async function valProjectTask(req, res, next) {
     let queryTask = await Tasks.findAll(task_id)
   
     const valProjectId = queryProject.project_id
-    const valTaskId = queryTask.resource_id
+    const valTaskId = queryTask.task_id
    
     if (valProjectId && valTaskId) {
       next()
@@ -88,6 +89,20 @@ async function valProjectTask(req, res, next) {
       res.status(400).json({ message: `The task with id ${task_id} could not be found` })
     }
   } catch (err) {
+    next(err)
+  }
+}
+
+async function valResourceId(req, res, next) {
+  const { id } = req.params
+  try {
+    const resource = await Resources.findAll(id)
+    if (resource) {
+      next()
+    } else {
+      res.status(400).json({ message: `The resource with id ${id} could not be found` })
+    }
+  } catch(err) {
     next(err)
   }
 }
